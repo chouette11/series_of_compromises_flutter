@@ -1,6 +1,5 @@
 import 'package:flutter_template/page/websocket/websocket_page.dart';
 import 'package:flutter_template/repository/user_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,8 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_template/page/root/root_page.dart';
 import 'package:web_socket_channel/io.dart';
-
-final firebaseFirestoreProvider = Provider((_) => FirebaseFirestore.instance);
 
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 
@@ -23,20 +20,20 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(
         path: '/',
         redirect: (BuildContext context, GoRouterState state) async {
-          final bool launched =
-              await ref.read(userRepositoryProvider).getIsLaunch();
-          if (!launched) {
-            ref.read(isTutorialProvider.notifier).update((state) => true);
-            return '/tutorial';
-          }
-          return null;
+          // final bool launched =
+          //     await ref.read(userRepositoryProvider).getIsLaunch();
+          // if (!launched) {
+          //   ref.read(isTutorialProvider.notifier).update((state) => true);
+          //   return '/tutorial';
+          // }
+          // return null;
         },
         builder: (context, state) => const RootPage(),
         routes: [
           GoRoute(
             path: 'websocket',
             builder: (context, state) => WebSocketPage(
-                channel: IOWebSocketChannel.connect('ws://192.168.11.83:8080')),
+                channel: IOWebSocketChannel.connect('ws://192.168.128.176:8080')),
           ),
         ],
       ),

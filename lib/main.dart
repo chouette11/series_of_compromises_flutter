@@ -30,14 +30,14 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     Future(() async {
-      final isMute = await ref.read(userRepositoryProvider).getIsMute();
-      ref.read(isMuteProvider.notifier).update((state) => isMute);
-      ref.read(authProvider).autoLogin();
-      final cache = ref.read(audioCacheProvider);
-      final path = await cache.load('audios/button7.mp3');
-      final path2 = await cache.load('audios/button8.mp3');
-      ref.read(buttonSoundProvider.notifier).update((state) => path.path);
-      ref.read(notSoundProvider.notifier).update((state) => path2.path);
+      // final isMute = await ref.read(userRepositoryProvider).getIsMute();
+      // ref.read(isMuteProvider.notifier).update((state) => isMute);
+      // ref.read(authProvider).autoLogin();
+      // final cache = ref.read(audioCacheProvider);
+      // final path = await cache.load('audios/button7.mp3');
+      // final path2 = await cache.load('audios/button8.mp3');
+      // ref.read(buttonSoundProvider.notifier).update((state) => path.path);
+      // ref.read(notSoundProvider.notifier).update((state) => path2.path);
     });
     super.initState();
   }

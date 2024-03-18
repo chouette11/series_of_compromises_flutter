@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-
 
 class WebSocketPage extends StatefulWidget {
   final WebSocketChannel channel;
@@ -12,7 +12,7 @@ class WebSocketPage extends StatefulWidget {
 }
 
 class _WebSocketPageState extends State<WebSocketPage> {
-  final  _controller = TextEditingController();
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,8 @@ class _WebSocketPageState extends State<WebSocketPage> {
   }
 
   void _sendMessage() {
-    if (_controller.text.isNotEmpty) {
-      widget.channel.sink.add(_controller.text);
-      _controller.clear();
-    }
+    final position = PositionEntity(x: 0, y: 50, z: 0);
+    widget.channel.sink.add(position.toJson().toString());
   }
 
   @override
