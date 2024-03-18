@@ -12,7 +12,6 @@ class PositionEntity with _$PositionEntity {
     required double x,
     required double y,
     required double z,
-    bool? isQuestion,
   }) = _PositionEntity;
 
    factory PositionEntity.fromJson(Map<String, dynamic> json) =>

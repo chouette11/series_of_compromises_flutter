@@ -11,7 +11,6 @@ _$_PositionEntity _$$_PositionEntityFromJson(Map<String, dynamic> json) =>
       x: (json['x'] as num).toDouble(),
       y: (json['y'] as num).toDouble(),
       z: (json['z'] as num).toDouble(),
-      isQuestion: json['isQuestion'] as bool?,
     );
 
 Map<String, dynamic> _$$_PositionEntityToJson(_$_PositionEntity instance) =>
@@ -19,5 +18,4 @@ Map<String, dynamic> _$$_PositionEntityToJson(_$_PositionEntity instance) =>
       'x': instance.x,
       'y': instance.y,
       'z': instance.z,
-      'isQuestion': instance.isQuestion,
     };
