@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketPage extends StatefulWidget {
@@ -13,47 +12,60 @@ class WebSocketPage extends StatefulWidget {
 
 class _WebSocketPageState extends State<WebSocketPage> {
   final _controller = TextEditingController();
+  Offset? tapPositionRatio;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('WebSocket Demo'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Form(
-              child: TextFormField(
-                controller: _controller,
-                decoration: const InputDecoration(labelText: 'Send a message'),
+      body: GestureDetector(
+        onTapDown: (TapDownDetails details) {
+          final localPosition = details.localPosition;
+          final tapRatioX = localPosition.dx / size.width;
+          final tapRatioY = localPosition.dy / size.height;
+          print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
+          setState(() {
+            tapPositionRatio = Offset(tapRatioX, tapRatioY);
+          });
+        },
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              color: Colors.blueAccent, // 視覚的なフィードバックのための背景色
+              child: const Center(
+                child: Text(
+                  'タップしてください',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-            StreamBuilder(
-              stream: widget.channel.stream,
-              builder: (context, snapshot) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 24.0),
-                  child: Text(snapshot.hasData ? '${snapshot.data}' : ''),
-                );
-              },
+            Container(
+              width: 150.0, // 上に重ねるBoxのサイズ
+              height: 150.0,
+              color: Colors.red,
             ),
+            if (tapPositionRatio != null)
+              Positioned(
+                left: tapPositionRatio!.dx * size.width,
+                top: tapPositionRatio!.dy * size.height,
+                child: Container(
+                  width: 50.0,
+                  height: 50.0,
+                  color: Colors.red,
+                ),
+              ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _sendMessage,
-        tooltip: 'Send message',
-        child: const Icon(Icons.send),
       ),
     );
   }
 
   void _sendMessage() {
-    final position = PositionEntity(x: 0, y: 50, z: 0);
-    widget.channel.sink.add(position.toJson().toString());
+    if (_controller.text.isNotEmpty) {
+      widget.channel.sink.add(_controller.text);
+      _controller.clear();
+    }
   }
 
   @override
