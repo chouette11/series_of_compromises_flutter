@@ -53,7 +53,7 @@ class _WebSocketPageState extends State<WebSocketPage> {
 
   void _sendMessage() {
     final position = PositionEntity(x: 0, y: 50, z: 0);
-    widget.channel.sink.add(position.toJson());
+    widget.channel.sink.add(position.toJson().toString());
   }
 
   @override

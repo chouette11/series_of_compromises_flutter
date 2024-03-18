@@ -43,7 +43,7 @@ change-dev:
 .PHONY: change-prod
 change-prod:
 	cd ios/Runner;rm -rf GoogleService-Info.plist
-	flutterfire configure -p pocket-schedule-1dab1 -o lib/firebase_options_dev.dart
+	flutterfire configure -p tanga-defense -o lib/firebase_options_prod.dart
 	fvm flutter clean
 
 .PHONY: pod-install

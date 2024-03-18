@@ -20,20 +20,20 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(
         path: '/',
         redirect: (BuildContext context, GoRouterState state) async {
-          final bool launched =
-              await ref.read(userRepositoryProvider).getIsLaunch();
-          if (!launched) {
-            ref.read(isTutorialProvider.notifier).update((state) => true);
-            return '/tutorial';
-          }
-          return null;
+          // final bool launched =
+          //     await ref.read(userRepositoryProvider).getIsLaunch();
+          // if (!launched) {
+          //   ref.read(isTutorialProvider.notifier).update((state) => true);
+          //   return '/tutorial';
+          // }
+          // return null;
         },
         builder: (context, state) => const RootPage(),
         routes: [
           GoRoute(
             path: 'websocket',
             builder: (context, state) => WebSocketPage(
-                channel: IOWebSocketChannel.connect('ws://192.168.11.83:8080')),
+                channel: IOWebSocketChannel.connect('ws://192.168.128.176:8080')),
           ),
         ],
       ),

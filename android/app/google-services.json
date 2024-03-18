@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607400634358",
+    "project_id": "tanga-defense",
+    "storage_bucket": "tanga-defense.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607400634358:android:3415e6927c60f21ce309d7",
+        "android_client_info": {
+          "package_name": "com.flutter.template"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmP0cEsYQoS86RJoXYQD-9HCFuF029pWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
