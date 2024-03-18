@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_template/provider/presentation_providers.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-class WebSocketPage extends StatefulWidget {
+class WebSocketPage extends ConsumerStatefulWidget {
   final WebSocketChannel channel;
 
   const WebSocketPage({Key? key, required this.channel}) : super(key: key);
 
   @override
-  _WebSocketPageState createState() => _WebSocketPageState();
+  ConsumerState createState() => _WebSocketPageState();
 }
 
-class _WebSocketPageState extends State<WebSocketPage> {
+class _WebSocketPageState extends ConsumerState<WebSocketPage> {
   final _controller = TextEditingController();
-  Offset? tapPositionRatio;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final tapPositionRatio = ref.watch(tapPositionListProvider);
+
     return Scaffold(
       body: GestureDetector(
         onTapDown: (TapDownDetails details) {
@@ -24,9 +27,10 @@ class _WebSocketPageState extends State<WebSocketPage> {
           final tapRatioX = localPosition.dx / size.width;
           final tapRatioY = localPosition.dy / size.height;
           print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
-          setState(() {
-            tapPositionRatio = Offset(tapRatioX, tapRatioY);
-          });
+          ref.read(tapPositionListProvider.notifier).add(
+                Offset(tapRatioX, tapRatioY),
+              );
+          print(ref.read(tapPositionListProvider));
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -45,10 +49,10 @@ class _WebSocketPageState extends State<WebSocketPage> {
               height: 150.0,
               color: Colors.red,
             ),
-            if (tapPositionRatio != null)
+            if (tapPositionRatio.length > 1)
               Positioned(
-                left: tapPositionRatio!.dx * size.width,
-                top: tapPositionRatio!.dy * size.height,
+                left: tapPositionRatio[0]!.dx * size.width,
+                top: tapPositionRatio[0]!.dy * size.height,
                 child: Container(
                   width: 50.0,
                   height: 50.0,

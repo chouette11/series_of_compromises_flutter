@@ -22,6 +22,19 @@ final errorTextProvider = StateProvider((ref) => '');
 
 final answerAssignedIdProvider = StateProvider<int>((ref) => 404);
 
+
+@Riverpod(keepAlive: true)
+class TapPositionList extends _$TapPositionList {
+  @override
+  List<Offset> build() {
+    return [];
+  }
+
+  void add(Offset offset) {
+      state = [...state, offset];
+  }
+}
+
 @riverpod
 class LimitTime extends _$LimitTime {
   @override
