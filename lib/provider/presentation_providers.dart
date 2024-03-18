@@ -4,8 +4,6 @@ import 'package:flutter_template/provider/domain_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_template/repository/message_repository.dart';
-import 'package:flutter_template/repository/room_repository.dart';
 import 'package:flutter_template/util/constant/const.dart';
 import 'package:uuid/uuid.dart';
 
@@ -23,22 +21,6 @@ final uidProvider = StateProvider<String>((ref) =>
 final errorTextProvider = StateProvider((ref) => '');
 
 final answerAssignedIdProvider = StateProvider<int>((ref) => 404);
-
-final messagesStreamProvider = StreamProvider.family(
-  (ref, String roomId) =>
-      ref.watch(messageRepositoryProvider).getMessageStream(roomId),
-);
-
-final roomStreamProvider = StreamProvider.family(
-  (ref, String roomId) =>
-      ref.watch(roomRepositoryProvider).getRoomStream(roomId),
-);
-
-final topicProvider =
-    FutureProvider.family<String, String>((ref, String roomId) async {
-  final room = await ref.read(roomRepositoryProvider).getRoom(roomId);
-  return room.topic;
-});
 
 @riverpod
 class LimitTime extends _$LimitTime {

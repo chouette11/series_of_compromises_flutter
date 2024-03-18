@@ -1,4 +1,3 @@
-import 'package:flutter_template/data/firestore_data_source.dart';
 import 'package:flutter_template/data/preferences_data_source.dart';
 import 'package:flutter_template/model/entity/user/user_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,11 +10,6 @@ class UserRepository {
 
   final Ref ref;
 
-  /// ユーザーを追加
-  Future<void> addUser(UserEntity userEntity) async {
-    final firestore = ref.read(firestoreProvider);
-    await firestore.insertUser(userEntity.toUserDocument());
-  }
 
   /// ユーザーが起動したかを判別
   Future<bool> getIsLaunch() async {

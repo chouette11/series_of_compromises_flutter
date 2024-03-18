@@ -28,7 +28,6 @@ class FirebaseAuthDataSource {
       final token = await FirebaseMessaging.instance.getToken();
       final uid = ref.read(uidProvider);
       final userEntity = UserEntity(uid: uid, token: token!);
-      await userRepo.addUser(userEntity);
     }
   }
 
