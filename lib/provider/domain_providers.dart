@@ -1,6 +1,5 @@
 import 'package:flutter_template/page/websocket/websocket_page.dart';
 import 'package:flutter_template/repository/user_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,8 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_template/page/root/root_page.dart';
 import 'package:web_socket_channel/io.dart';
-
-final firebaseFirestoreProvider = Provider((_) => FirebaseFirestore.instance);
 
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 

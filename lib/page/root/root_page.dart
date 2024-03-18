@@ -1,14 +1,10 @@
 import 'package:flutter_template/data/firebase_auth_data_source.dart';
-import 'package:flutter_template/page/root/component/mute_button.dart';
 import 'package:flutter_template/provider/domain_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/provider/audio_provider.dart';
 import 'package:flutter_template/util/constant/color_constant.dart';
 import 'package:go_router/go_router.dart';
-import 'package:just_audio/just_audio.dart';
-
-final _localPlayer = AudioPlayer(userAgent: "local");
 
 class RootPage extends ConsumerStatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -22,10 +18,6 @@ class _RootPageState extends ConsumerState<RootPage> {
 
   @override
   void initState() {
-    final isTutorial = ref.read(isTutorialProvider);
-    if (!isTutorial) {
-      ref.read(authProvider).requestNotification(context);
-    }
     final audio = ref.read(justAudioProvider);
     audio.setAsset('assets/audios/title.mp3');
     audio.play();
@@ -52,11 +44,6 @@ class _RootPageState extends ConsumerState<RootPage> {
                       context.push('/websocket');
                     }, child: Text('websocket')),
                   ],
-                ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: MuteButton(_localPlayer),
                 ),
               ],
             ),

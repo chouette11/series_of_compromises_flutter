@@ -24,9 +24,6 @@ mixin _$MessageDocument {
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'uid')
   String get uid => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  @JsonKey(name: 'createdAt')
-  DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'isQuestion')
   bool? get isQuestion => throw _privateConstructorUsedError;
 
@@ -45,7 +42,6 @@ abstract class $MessageDocumentCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'content') String content,
       @JsonKey(name: 'uid') String uid,
-      @TimestampConverter() @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'isQuestion') bool? isQuestion});
 }
 
@@ -64,7 +60,6 @@ class _$MessageDocumentCopyWithImpl<$Res, $Val extends MessageDocument>
   $Res call({
     Object? content = null,
     Object? uid = null,
-    Object? createdAt = null,
     Object? isQuestion = freezed,
   }) {
     return _then(_value.copyWith(
@@ -76,10 +71,6 @@ class _$MessageDocumentCopyWithImpl<$Res, $Val extends MessageDocument>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       isQuestion: freezed == isQuestion
           ? _value.isQuestion
           : isQuestion // ignore: cast_nullable_to_non_nullable
@@ -99,7 +90,6 @@ abstract class _$$_MessageDocumentCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'content') String content,
       @JsonKey(name: 'uid') String uid,
-      @TimestampConverter() @JsonKey(name: 'createdAt') DateTime createdAt,
       @JsonKey(name: 'isQuestion') bool? isQuestion});
 }
 
@@ -116,7 +106,6 @@ class __$$_MessageDocumentCopyWithImpl<$Res>
   $Res call({
     Object? content = null,
     Object? uid = null,
-    Object? createdAt = null,
     Object? isQuestion = freezed,
   }) {
     return _then(_$_MessageDocument(
@@ -128,10 +117,6 @@ class __$$_MessageDocumentCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       isQuestion: freezed == isQuestion
           ? _value.isQuestion
           : isQuestion // ignore: cast_nullable_to_non_nullable
@@ -146,7 +131,6 @@ class _$_MessageDocument extends _MessageDocument {
   const _$_MessageDocument(
       {@JsonKey(name: 'content') required this.content,
       @JsonKey(name: 'uid') required this.uid,
-      @TimestampConverter() @JsonKey(name: 'createdAt') required this.createdAt,
       @JsonKey(name: 'isQuestion') this.isQuestion})
       : super._();
 
@@ -160,16 +144,12 @@ class _$_MessageDocument extends _MessageDocument {
   @JsonKey(name: 'uid')
   final String uid;
   @override
-  @TimestampConverter()
-  @JsonKey(name: 'createdAt')
-  final DateTime createdAt;
-  @override
   @JsonKey(name: 'isQuestion')
   final bool? isQuestion;
 
   @override
   String toString() {
-    return 'MessageDocument(content: $content, uid: $uid, createdAt: $createdAt, isQuestion: $isQuestion)';
+    return 'MessageDocument(content: $content, uid: $uid, isQuestion: $isQuestion)';
   }
 
   @override
@@ -179,16 +159,13 @@ class _$_MessageDocument extends _MessageDocument {
             other is _$_MessageDocument &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.uid, uid) || other.uid == uid) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
             (identical(other.isQuestion, isQuestion) ||
                 other.isQuestion == isQuestion));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, content, uid, createdAt, isQuestion);
+  int get hashCode => Object.hash(runtimeType, content, uid, isQuestion);
 
   @JsonKey(ignore: true)
   @override
@@ -206,15 +183,10 @@ class _$_MessageDocument extends _MessageDocument {
 
 abstract class _MessageDocument extends MessageDocument {
   const factory _MessageDocument(
-      {@JsonKey(name: 'content')
-          required final String content,
-      @JsonKey(name: 'uid')
-          required final String uid,
-      @TimestampConverter()
-      @JsonKey(name: 'createdAt')
-          required final DateTime createdAt,
-      @JsonKey(name: 'isQuestion')
-          final bool? isQuestion}) = _$_MessageDocument;
+          {@JsonKey(name: 'content') required final String content,
+          @JsonKey(name: 'uid') required final String uid,
+          @JsonKey(name: 'isQuestion') final bool? isQuestion}) =
+      _$_MessageDocument;
   const _MessageDocument._() : super._();
 
   factory _MessageDocument.fromJson(Map<String, dynamic> json) =
@@ -226,10 +198,6 @@ abstract class _MessageDocument extends MessageDocument {
   @override
   @JsonKey(name: 'uid')
   String get uid;
-  @override
-  @TimestampConverter()
-  @JsonKey(name: 'createdAt')
-  DateTime get createdAt;
   @override
   @JsonKey(name: 'isQuestion')
   bool? get isQuestion;

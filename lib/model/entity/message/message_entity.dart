@@ -23,7 +23,7 @@ class MessageEntity with _$MessageEntity {
     return MessageEntity(
       content: taskDoc.content,
       uid: taskDoc.uid,
-      createdAt: taskDoc.createdAt,
+      createdAt: DateTime.now(),
     );
   }
 
@@ -31,7 +31,6 @@ class MessageEntity with _$MessageEntity {
     return MessageDocument(
       content: content,
       uid: uid,
-      createdAt: createdAt,
     );
   }
 }
