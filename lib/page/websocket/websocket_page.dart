@@ -89,7 +89,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                 .map(
                   (e) => Positioned(
                     left: e.x * size.width,
-                    top: e.y * size.height,
+                    top: e.z * size.height,
                     child: SizedBox(
                         width: 30,
                         height: 30,
