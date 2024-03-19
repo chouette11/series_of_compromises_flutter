@@ -12,7 +12,8 @@ class PositionEntity with _$PositionEntity {
     required double x,
     required double y,
     required double z,
-    required String typetext,
+    required String typeText,
+    required bool isVisible,
   }) = _PositionEntity;
 
   factory PositionEntity.fromJson(Map<String, dynamic> json) =>

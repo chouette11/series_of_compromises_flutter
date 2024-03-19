@@ -49,7 +49,8 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
               .add(Offset(tapRatioX, tapRatioY));
           // 送信
           final id = const Uuid().v4();
-          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY, typetext: ObjectTypeEnum.enemy.name, id: id);
+          const isVisible = true;
+          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY, typeText: ObjectTypeEnum.enemy.name, id: id, isVisible: isVisible);
           final text = jsonEncode(position.toJson());
           print(jsonEncode(position.toJson()));
           widget.channel.sink.add(text);
