@@ -18,8 +18,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final tapPositionRatio = ref.watch(tapPositionListProvider);
-
+    final tapPositionList = ref.watch(tapPositionListProvider);
     return Scaffold(
       body: GestureDetector(
         onTapDown: (TapDownDetails details) {
@@ -27,38 +26,51 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
           final tapRatioX = localPosition.dx / size.width;
           final tapRatioY = localPosition.dy / size.height;
           print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
-          ref.read(tapPositionListProvider.notifier).add(
-                Offset(tapRatioX, tapRatioY),
-              );
+          if (tapRatioY < 0.8) {
+            ref.read(tapPositionListProvider.notifier).add(
+                  Offset(tapRatioX, tapRatioY),
+                );
+          } else {
+            return;
+          }
           print(ref.read(tapPositionListProvider));
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             Container(
-              color: Colors.blueAccent, // 視覚的なフィードバックのための背景色
+              color: Colors.white, // 視覚的なフィードバックのための背景色
               child: const Center(
                 child: Text(
                   'タップしてください',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
-            Container(
-              width: 150.0, // 上に重ねるBoxのサイズ
-              height: 150.0,
-              color: Colors.red,
+            Positioned(
+              top: 0.5 * size.height,
+              left: 0.5 * size.width,
+              child: SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: Image.asset('assets/images/yuusya.png')),
             ),
-            if (tapPositionRatio.length > 1)
-              Positioned(
-                left: tapPositionRatio[0]!.dx * size.width,
-                top: tapPositionRatio[0]!.dy * size.height,
-                child: Container(
-                  width: 50.0,
-                  height: 50.0,
-                  color: Colors.red,
-                ),
-              ),
+            SizedBox(
+                width: size.height * 0.3,
+                height: size.width * 0.3,
+                child: Image.asset('assets/images/castle.png')),
+            ...tapPositionList
+                .map(
+                  (e) => Positioned(
+                    left: e.dx * size.width,
+                    top: e.dy * size.height,
+                    child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: Image.asset('assets/images/honoo.png')),
+                  ),
+                )
+                .toList()
           ],
         ),
       ),
