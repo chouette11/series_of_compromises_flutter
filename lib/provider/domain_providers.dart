@@ -1,5 +1,4 @@
 import 'package:flutter_template/page/websocket/websocket_page.dart';
-import 'package:flutter_template/repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,7 +32,7 @@ final routerProvider = Provider<GoRouter>(
           GoRoute(
             path: 'websocket',
             builder: (context, state) => WebSocketPage(
-                channel: IOWebSocketChannel.connect('ws://192.168.128.176:8080')),
+                channel: IOWebSocketChannel.connect('ws://35.77.220.248:8080')),
           ),
         ],
       ),
