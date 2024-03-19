@@ -6,7 +6,7 @@ part of 'presentation_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tapPositionListHash() => r'9ccc6715902f10da034d10db9f313e7a4b0440f4';
+String _$tapPositionListHash() => r'ad97b50427c1bf6172321679b6b408cfa9d0c5c7';
 
 /// See also [TapPositionList].
 @ProviderFor(TapPositionList)
