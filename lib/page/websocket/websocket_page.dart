@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:flutter_template/provider/presentation_providers.dart';
+import 'package:flutter_template/util/enum/object.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketPage extends ConsumerStatefulWidget {
@@ -16,6 +17,17 @@ class WebSocketPage extends ConsumerStatefulWidget {
 }
 
 class _WebSocketPageState extends ConsumerState<WebSocketPage> {
+  List<String> unityPositionList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    widget.channel.stream.listen((e) {
+      setState(() {
+        unityPositionList.add(e);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +47,12 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
               .read(tapPositionListProvider.notifier)
               .add(Offset(tapRatioX, tapRatioY));
           // 送信
-          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY);
+          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY, typetext: ObjectTypeEnum.enemy.name);
           final text = jsonEncode(position.toJson());
           print(jsonEncode(position.toJson()));
           widget.channel.sink.add(text);
           print(ref.read(tapPositionListProvider));
+          print('unityPositionList: $unityPositionList');
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
