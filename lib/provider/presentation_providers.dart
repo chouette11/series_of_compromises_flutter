@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:flutter_template/provider/domain_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,16 +23,25 @@ final errorTextProvider = StateProvider((ref) => '');
 
 final answerAssignedIdProvider = StateProvider<int>((ref) => 404);
 
-
 @Riverpod(keepAlive: true)
-class TapPositionList extends _$TapPositionList {
+class ObjectPositionList extends _$ObjectPositionList {
   @override
-  List<Offset> build() {
+  List<PositionEntity> build() {
     return [];
   }
 
-  void add(Offset offset) {
-      state = [...state, offset];
+  void add(PositionEntity position) {
+    state = [...state, position];
+  }
+
+  void update(PositionEntity position) {
+    state = [
+      for (final e in state)
+        if (e.id == position.id)
+          e.copyWith(x: position.x, y: position.y, z: position.z)
+        else
+          e,
+    ];
   }
 }
 
