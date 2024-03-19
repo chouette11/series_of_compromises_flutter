@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:flutter_template/provider/presentation_providers.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -13,7 +16,6 @@ class WebSocketPage extends ConsumerStatefulWidget {
 }
 
 class _WebSocketPageState extends ConsumerState<WebSocketPage> {
-  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,17 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
           final tapRatioX = localPosition.dx / size.width;
           final tapRatioY = localPosition.dy / size.height;
           print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
-          if (tapRatioY < 0.8) {
-            ref.read(tapPositionListProvider.notifier).add(
-                  Offset(tapRatioX, tapRatioY),
-                );
-          } else {
+          if (tapRatioY > 0.8) {
             return;
           }
+          ref
+              .read(tapPositionListProvider.notifier)
+              .add(Offset(tapRatioX, tapRatioY));
+          // 送信
+          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY);
+          final text = jsonEncode(position.toJson());
+          print(jsonEncode(position.toJson()));
+          widget.channel.sink.add(text);
           print(ref.read(tapPositionListProvider));
         },
         child: Stack(
@@ -75,13 +81,6 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
         ),
       ),
     );
-  }
-
-  void _sendMessage() {
-    if (_controller.text.isNotEmpty) {
-      widget.channel.sink.add(_controller.text);
-      _controller.clear();
-    }
   }
 
   @override
