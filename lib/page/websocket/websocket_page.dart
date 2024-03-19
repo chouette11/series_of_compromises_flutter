@@ -39,7 +39,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
         onTapDown: (TapDownDetails details) {
           final localPosition = details.localPosition;
           final tapRatioX = localPosition.dx / size.width;
-          final tapRatioY = localPosition.dy / size.height;
+          final tapRatioY = 1 - localPosition.dy / size.height;
           final id = const Uuid().v4();
           const isVisible = true;
           final position = PositionEntity(
@@ -50,7 +50,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
               id: id,
               isVisible: isVisible);
           print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
-          if (tapRatioY > 0.8) {
+          if (tapRatioY < 0.2) {
             return;
           }
           ref.read(objectPositionListProvider.notifier).add(position);
@@ -89,7 +89,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                 .map(
                   (e) => Positioned(
                     left: e.x * size.width,
-                    top: e.z * size.height,
+                    bottom: e.z * size.height,
                     child: SizedBox(
                         width: 30,
                         height: 30,
