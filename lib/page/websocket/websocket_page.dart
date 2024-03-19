@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:flutter_template/provider/presentation_providers.dart';
 import 'package:flutter_template/util/enum/object.dart';
+import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketPage extends ConsumerStatefulWidget {
@@ -47,7 +48,8 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
               .read(tapPositionListProvider.notifier)
               .add(Offset(tapRatioX, tapRatioY));
           // 送信
-          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY, typetext: ObjectTypeEnum.enemy.name);
+          final id = const Uuid().v4();
+          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY, typetext: ObjectTypeEnum.enemy.name, id: id);
           final text = jsonEncode(position.toJson());
           print(jsonEncode(position.toJson()));
           widget.channel.sink.add(text);
