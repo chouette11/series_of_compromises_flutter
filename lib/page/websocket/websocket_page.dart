@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/model/entity/position/position_entity.dart';
 import 'package:flutter_template/provider/presentation_providers.dart';
 import 'package:flutter_template/util/enum/object.dart';
+import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketPage extends ConsumerStatefulWidget {
@@ -32,26 +33,32 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final tapPositionList = ref.watch(tapPositionListProvider);
+    final tapPositionList = ref.watch(objectPositionListProvider);
     return Scaffold(
       body: GestureDetector(
         onTapDown: (TapDownDetails details) {
           final localPosition = details.localPosition;
           final tapRatioX = localPosition.dx / size.width;
           final tapRatioY = localPosition.dy / size.height;
+          final id = const Uuid().v4();
+          const isVisible = true;
+          final position = PositionEntity(
+              x: tapRatioX,
+              y: 2,
+              z: tapRatioY,
+              typeText: ObjectTypeEnum.enemy.name,
+              id: id,
+              isVisible: isVisible);
           print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
           if (tapRatioY > 0.8) {
             return;
           }
-          ref
-              .read(tapPositionListProvider.notifier)
-              .add(Offset(tapRatioX, tapRatioY));
+          ref.read(objectPositionListProvider.notifier).add(position);
           // 送信
-          final position = PositionEntity(x: tapRatioX, y: 2, z: tapRatioY, typetext: ObjectTypeEnum.enemy.name);
           final text = jsonEncode(position.toJson());
           print(jsonEncode(position.toJson()));
           widget.channel.sink.add(text);
-          print(ref.read(tapPositionListProvider));
+          print(ref.read(objectPositionListProvider));
           print('unityPositionList: $unityPositionList');
         },
         child: Stack(
@@ -81,8 +88,8 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
             ...tapPositionList
                 .map(
                   (e) => Positioned(
-                    left: e.dx * size.width,
-                    top: e.dy * size.height,
+                    left: e.x * size.width,
+                    top: e.y * size.height,
                     child: SizedBox(
                         width: 30,
                         height: 30,

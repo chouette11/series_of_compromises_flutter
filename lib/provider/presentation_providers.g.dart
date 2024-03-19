@@ -6,22 +6,23 @@ part of 'presentation_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tapPositionListHash() => r'ad97b50427c1bf6172321679b6b408cfa9d0c5c7';
+String _$objectPositionListHash() =>
+    r'0908222fd3f91630847b52d5e5190044bebe5462';
 
-/// See also [TapPositionList].
-@ProviderFor(TapPositionList)
-final tapPositionListProvider =
-    NotifierProvider<TapPositionList, List<Offset>>.internal(
-  TapPositionList.new,
-  name: r'tapPositionListProvider',
+/// See also [ObjectPositionList].
+@ProviderFor(ObjectPositionList)
+final objectPositionListProvider =
+    NotifierProvider<ObjectPositionList, List<PositionEntity>>.internal(
+  ObjectPositionList.new,
+  name: r'objectPositionListProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$tapPositionListHash,
+      : _$objectPositionListHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$TapPositionList = Notifier<List<Offset>>;
+typedef _$ObjectPositionList = Notifier<List<PositionEntity>>;
 String _$limitTimeHash() => r'71d4c1309866b62184df56c11be77e8ad0567d73';
 
 /// See also [LimitTime].

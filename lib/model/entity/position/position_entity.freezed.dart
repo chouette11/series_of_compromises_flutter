@@ -20,10 +20,12 @@ PositionEntity _$PositionEntityFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PositionEntity {
+  String get id => throw _privateConstructorUsedError;
   double get x => throw _privateConstructorUsedError;
   double get y => throw _privateConstructorUsedError;
   double get z => throw _privateConstructorUsedError;
-  String get typetext => throw _privateConstructorUsedError;
+  String get typeText => throw _privateConstructorUsedError;
+  bool get isVisible => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +39,13 @@ abstract class $PositionEntityCopyWith<$Res> {
           PositionEntity value, $Res Function(PositionEntity) then) =
       _$PositionEntityCopyWithImpl<$Res, PositionEntity>;
   @useResult
-  $Res call({double x, double y, double z, String typetext});
+  $Res call(
+      {String id,
+      double x,
+      double y,
+      double z,
+      String typeText,
+      bool isVisible});
 }
 
 /// @nodoc
@@ -53,12 +61,18 @@ class _$PositionEntityCopyWithImpl<$Res, $Val extends PositionEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? x = null,
     Object? y = null,
     Object? z = null,
-    Object? typetext = null,
+    Object? typeText = null,
+    Object? isVisible = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       x: null == x
           ? _value.x
           : x // ignore: cast_nullable_to_non_nullable
@@ -71,10 +85,14 @@ class _$PositionEntityCopyWithImpl<$Res, $Val extends PositionEntity>
           ? _value.z
           : z // ignore: cast_nullable_to_non_nullable
               as double,
-      typetext: null == typetext
-          ? _value.typetext
-          : typetext // ignore: cast_nullable_to_non_nullable
+      typeText: null == typeText
+          ? _value.typeText
+          : typeText // ignore: cast_nullable_to_non_nullable
               as String,
+      isVisible: null == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +105,13 @@ abstract class _$$_PositionEntityCopyWith<$Res>
       __$$_PositionEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double x, double y, double z, String typetext});
+  $Res call(
+      {String id,
+      double x,
+      double y,
+      double z,
+      String typeText,
+      bool isVisible});
 }
 
 /// @nodoc
@@ -101,12 +125,18 @@ class __$$_PositionEntityCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? x = null,
     Object? y = null,
     Object? z = null,
-    Object? typetext = null,
+    Object? typeText = null,
+    Object? isVisible = null,
   }) {
     return _then(_$_PositionEntity(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       x: null == x
           ? _value.x
           : x // ignore: cast_nullable_to_non_nullable
@@ -119,10 +149,14 @@ class __$$_PositionEntityCopyWithImpl<$Res>
           ? _value.z
           : z // ignore: cast_nullable_to_non_nullable
               as double,
-      typetext: null == typetext
-          ? _value.typetext
-          : typetext // ignore: cast_nullable_to_non_nullable
+      typeText: null == typeText
+          ? _value.typeText
+          : typeText // ignore: cast_nullable_to_non_nullable
               as String,
+      isVisible: null == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -131,15 +165,19 @@ class __$$_PositionEntityCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PositionEntity extends _PositionEntity {
   const _$_PositionEntity(
-      {required this.x,
+      {required this.id,
+      required this.x,
       required this.y,
       required this.z,
-      required this.typetext})
+      required this.typeText,
+      required this.isVisible})
       : super._();
 
   factory _$_PositionEntity.fromJson(Map<String, dynamic> json) =>
       _$$_PositionEntityFromJson(json);
 
+  @override
+  final String id;
   @override
   final double x;
   @override
@@ -147,11 +185,13 @@ class _$_PositionEntity extends _PositionEntity {
   @override
   final double z;
   @override
-  final String typetext;
+  final String typeText;
+  @override
+  final bool isVisible;
 
   @override
   String toString() {
-    return 'PositionEntity(x: $x, y: $y, z: $z, typetext: $typetext)';
+    return 'PositionEntity(id: $id, x: $x, y: $y, z: $z, typeText: $typeText, isVisible: $isVisible)';
   }
 
   @override
@@ -159,16 +199,20 @@ class _$_PositionEntity extends _PositionEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PositionEntity &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.x, x) || other.x == x) &&
             (identical(other.y, y) || other.y == y) &&
             (identical(other.z, z) || other.z == z) &&
-            (identical(other.typetext, typetext) ||
-                other.typetext == typetext));
+            (identical(other.typeText, typeText) ||
+                other.typeText == typeText) &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, x, y, z, typetext);
+  int get hashCode =>
+      Object.hash(runtimeType, id, x, y, z, typeText, isVisible);
 
   @JsonKey(ignore: true)
   @override
@@ -186,15 +230,19 @@ class _$_PositionEntity extends _PositionEntity {
 
 abstract class _PositionEntity extends PositionEntity {
   const factory _PositionEntity(
-      {required final double x,
+      {required final String id,
+      required final double x,
       required final double y,
       required final double z,
-      required final String typetext}) = _$_PositionEntity;
+      required final String typeText,
+      required final bool isVisible}) = _$_PositionEntity;
   const _PositionEntity._() : super._();
 
   factory _PositionEntity.fromJson(Map<String, dynamic> json) =
       _$_PositionEntity.fromJson;
 
+  @override
+  String get id;
   @override
   double get x;
   @override
@@ -202,7 +250,9 @@ abstract class _PositionEntity extends PositionEntity {
   @override
   double get z;
   @override
-  String get typetext;
+  String get typeText;
+  @override
+  bool get isVisible;
   @override
   @JsonKey(ignore: true)
   _$$_PositionEntityCopyWith<_$_PositionEntity> get copyWith =>

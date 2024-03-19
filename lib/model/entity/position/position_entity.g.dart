@@ -8,16 +8,20 @@ part of 'position_entity.dart';
 
 _$_PositionEntity _$$_PositionEntityFromJson(Map<String, dynamic> json) =>
     _$_PositionEntity(
+      id: json['id'] as String,
       x: (json['x'] as num).toDouble(),
       y: (json['y'] as num).toDouble(),
       z: (json['z'] as num).toDouble(),
-      typetext: json['typetext'] as String,
+      typeText: json['typeText'] as String,
+      isVisible: json['isVisible'] as bool,
     );
 
 Map<String, dynamic> _$$_PositionEntityToJson(_$_PositionEntity instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'x': instance.x,
       'y': instance.y,
       'z': instance.z,
-      'typetext': instance.typetext,
+      'typeText': instance.typeText,
+      'isVisible': instance.isVisible,
     };
