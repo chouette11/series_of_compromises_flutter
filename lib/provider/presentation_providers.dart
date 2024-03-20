@@ -27,15 +27,17 @@ final answerAssignedIdProvider = StateProvider<int>((ref) => 404);
 class ObjectPositionList extends _$ObjectPositionList {
   @override
   List<PositionEntity> build() {
+    final uid = ref.read(uidProvider);
     return [
-      const PositionEntity(
+      PositionEntity(
           id: "hero",
           x: 0,
           y: 0,
           z: 0,
           isVisible: false,
           sender: "flutter",
-          typeText: 'hero')
+          typeText: 'hero',
+          uid: uid),
     ];
   }
 

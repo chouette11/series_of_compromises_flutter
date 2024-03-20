@@ -15,6 +15,7 @@ _$_PositionEntity _$$_PositionEntityFromJson(Map<String, dynamic> json) =>
       typeText: json['typeText'] as String,
       isVisible: json['isVisible'] as bool,
       sender: json['sender'] as String,
+      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$$_PositionEntityToJson(_$_PositionEntity instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$_PositionEntityToJson(_$_PositionEntity instance) =>
       'typeText': instance.typeText,
       'isVisible': instance.isVisible,
       'sender': instance.sender,
+      'uid': instance.uid,
     };
