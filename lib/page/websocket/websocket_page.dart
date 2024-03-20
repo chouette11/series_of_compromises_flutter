@@ -18,15 +18,20 @@ class WebSocketPage extends ConsumerStatefulWidget {
 }
 
 class _WebSocketPageState extends ConsumerState<WebSocketPage> {
-  List<String> unityPositionList = [];
-
   @override
   void initState() {
     super.initState();
     widget.channel.stream.listen((e) {
-      setState(() {
-        unityPositionList.add(e);
-      });
+      final text = e as String;
+      if (!text.contains('サーバー') && text.contains('unity')) {
+        final json = jsonDecode(text);
+        final position = PositionEntity.fromJson(json);
+        if (position.typeText == 'hero') {
+          ref.read(objectPositionListProvider.notifier).add(position);
+        }
+        ref.read(objectPositionListProvider.notifier).update(position);
+      }
+      setState(() {});
     });
   }
 
@@ -34,6 +39,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final tapPositionList = ref.watch(objectPositionListProvider);
+
     return Scaffold(
       body: GestureDetector(
         onTapDown: (TapDownDetails details) {
@@ -43,12 +49,14 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
           final id = const Uuid().v4();
           const isVisible = true;
           final position = PositionEntity(
-              x: tapRatioX,
-              y: 2,
-              z: tapRatioY,
-              typeText: ObjectTypeEnum.enemy.name,
-              id: id,
-              isVisible: isVisible);
+            x: tapRatioX,
+            y: 2,
+            z: tapRatioY,
+            typeText: ObjectTypeEnum.enemy.name,
+            id: id,
+            isVisible: isVisible,
+            sender: "flutter",
+          );
           print('tapRatioX: $tapRatioX, tapRatioY: $tapRatioY');
           if (tapRatioY < 0.2) {
             return;
@@ -59,7 +67,6 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
           print(jsonEncode(position.toJson()));
           widget.channel.sink.add(text);
           print(ref.read(objectPositionListProvider));
-          print('unityPositionList: $unityPositionList');
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -74,8 +81,11 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
               ),
             ),
             Positioned(
-              top: 0.5 * size.height,
-              left: 0.5 * size.width,
+              left: tapPositionList.firstWhere((e) => e.typeText == "hero").x *
+                  size.width,
+              bottom:
+                  tapPositionList.firstWhere((e) => e.typeText == "hero").z *
+                      size.height,
               child: SizedBox(
                   height: 60,
                   width: 60,
@@ -86,14 +96,18 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                 height: size.width * 0.3,
                 child: Image.asset('assets/images/castle.png')),
             ...tapPositionList
+                .where((e) => e.typeText == 'enemy')
                 .map(
-                  (e) => Positioned(
-                    left: e.x * size.width,
-                    bottom: e.z * size.height,
-                    child: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: Image.asset('assets/images/honoo.png')),
+                  (e) => Visibility(
+                    visible: e.isVisible,
+                    child: Positioned(
+                      left: e.x * size.width,
+                      bottom: e.z * size.height,
+                      child: SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: Image.asset('assets/images/honoo.png')),
+                    ),
                   ),
                 )
                 .toList()
