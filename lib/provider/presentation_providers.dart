@@ -38,6 +38,15 @@ class ObjectPositionList extends _$ObjectPositionList {
           sender: "flutter",
           typeText: 'hero',
           uid: uid),
+      PositionEntity(
+          id: "50",
+          x: 0,
+          y: 0,
+          z: 0,
+          isVisible: false,
+          sender: "flutter",
+          typeText: 'hp',
+          uid: uid),
     ];
   }
 

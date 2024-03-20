@@ -38,7 +38,6 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
     final size = MediaQuery.of(context).size;
     final tapPositionList = ref.watch(objectPositionListProvider);
     final uid = ref.watch(uidProvider);
-    final value = 0.5;
 
     return Scaffold(
       body: GestureDetector(
@@ -103,7 +102,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                 width: size.width * 0.2,
                 height: size.height * 0.01,
                 child: LinearProgressIndicator(
-                  value: value,
+                  value: int.parse(tapPositionList.lastWhere((e) => e.typeText == "hp").id) / 50,
                   valueColor: const AlwaysStoppedAnimation(Colors.green),
                   backgroundColor: Colors.grey,
                 ),
