@@ -26,7 +26,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
       if (!text.contains('サーバー')) {
         final json = jsonDecode(text);
         final position = PositionEntity.fromJson(json);
-          ref.read(objectPositionListProvider.notifier).add(position);
+        ref.read(objectPositionListProvider.notifier).add(position);
         ref.read(objectPositionListProvider.notifier).update(position);
       }
       setState(() {});
@@ -38,6 +38,7 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
     final size = MediaQuery.of(context).size;
     final tapPositionList = ref.watch(objectPositionListProvider);
     final uid = ref.watch(uidProvider);
+    final value = 0.5;
 
     return Scaffold(
       body: GestureDetector(
@@ -95,6 +96,19 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                 width: size.height * 0.3,
                 height: size.width * 0.3,
                 child: Image.asset('assets/images/castle.png')),
+            Positioned(
+              bottom: size.height * 0.03,
+              right: size.width * 0.07,
+              child: SizedBox(
+                width: size.width * 0.2,
+                height: size.height * 0.01,
+                child: LinearProgressIndicator(
+                  value: value,
+                  valueColor: const AlwaysStoppedAnimation(Colors.green),
+                  backgroundColor: Colors.grey,
+                ),
+              ),
+            ),
             ...tapPositionList
                 .where((e) => e.typeText == 'enemy')
                 .map(
@@ -106,7 +120,9 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                       child: SizedBox(
                           width: 30,
                           height: 30,
-                          child: e.uid == uid ? Image.asset('assets/images/obake.png') :Image.asset('assets/images/honoo.png')),
+                          child: e.uid == uid
+                              ? Image.asset('assets/images/obake.png')
+                              : Image.asset('assets/images/honoo.png')),
                     ),
                   ),
                 )
