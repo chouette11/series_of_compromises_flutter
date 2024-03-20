@@ -27,21 +27,38 @@ final answerAssignedIdProvider = StateProvider<int>((ref) => 404);
 class ObjectPositionList extends _$ObjectPositionList {
   @override
   List<PositionEntity> build() {
-    return [];
+    return [
+      const PositionEntity(
+          id: "hero",
+          x: 0,
+          y: 0,
+          z: 0,
+          isVisible: false,
+          sender: "flutter",
+          typeText: 'hero')
+    ];
   }
 
   void add(PositionEntity position) {
-    state = [...state, position];
+    if (!state.map((e) => e.id).toList().contains(position.id)) {
+      state = [...state, position];
+    }
   }
 
   void update(PositionEntity position) {
-    state = [
-      for (final e in state)
-        if (e.id == position.id)
-          e.copyWith(x: position.x, y: position.y, z: position.z)
-        else
-          e,
-    ];
+    if (position.y != 0) {
+      state = [
+        for (final e in state)
+          if (e.id == position.id)
+            e.copyWith(
+                x: position.x,
+                y: position.y,
+                z: position.z,
+                isVisible: position.isVisible)
+          else
+            e,
+      ];
+    }
   }
 }
 
