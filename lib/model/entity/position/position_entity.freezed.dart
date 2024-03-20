@@ -26,6 +26,7 @@ mixin _$PositionEntity {
   double get z => throw _privateConstructorUsedError;
   String get typeText => throw _privateConstructorUsedError;
   bool get isVisible => throw _privateConstructorUsedError;
+  String get sender => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $PositionEntityCopyWith<$Res> {
       double y,
       double z,
       String typeText,
-      bool isVisible});
+      bool isVisible,
+      String sender});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$PositionEntityCopyWithImpl<$Res, $Val extends PositionEntity>
     Object? z = null,
     Object? typeText = null,
     Object? isVisible = null,
+    Object? sender = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -93,6 +96,10 @@ class _$PositionEntityCopyWithImpl<$Res, $Val extends PositionEntity>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool,
+      sender: null == sender
+          ? _value.sender
+          : sender // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -111,7 +118,8 @@ abstract class _$$_PositionEntityCopyWith<$Res>
       double y,
       double z,
       String typeText,
-      bool isVisible});
+      bool isVisible,
+      String sender});
 }
 
 /// @nodoc
@@ -131,6 +139,7 @@ class __$$_PositionEntityCopyWithImpl<$Res>
     Object? z = null,
     Object? typeText = null,
     Object? isVisible = null,
+    Object? sender = null,
   }) {
     return _then(_$_PositionEntity(
       id: null == id
@@ -157,6 +166,10 @@ class __$$_PositionEntityCopyWithImpl<$Res>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool,
+      sender: null == sender
+          ? _value.sender
+          : sender // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -170,7 +183,8 @@ class _$_PositionEntity extends _PositionEntity {
       required this.y,
       required this.z,
       required this.typeText,
-      required this.isVisible})
+      required this.isVisible,
+      required this.sender})
       : super._();
 
   factory _$_PositionEntity.fromJson(Map<String, dynamic> json) =>
@@ -188,10 +202,12 @@ class _$_PositionEntity extends _PositionEntity {
   final String typeText;
   @override
   final bool isVisible;
+  @override
+  final String sender;
 
   @override
   String toString() {
-    return 'PositionEntity(id: $id, x: $x, y: $y, z: $z, typeText: $typeText, isVisible: $isVisible)';
+    return 'PositionEntity(id: $id, x: $x, y: $y, z: $z, typeText: $typeText, isVisible: $isVisible, sender: $sender)';
   }
 
   @override
@@ -206,13 +222,14 @@ class _$_PositionEntity extends _PositionEntity {
             (identical(other.typeText, typeText) ||
                 other.typeText == typeText) &&
             (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
+                other.isVisible == isVisible) &&
+            (identical(other.sender, sender) || other.sender == sender));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, x, y, z, typeText, isVisible);
+      Object.hash(runtimeType, id, x, y, z, typeText, isVisible, sender);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +252,8 @@ abstract class _PositionEntity extends PositionEntity {
       required final double y,
       required final double z,
       required final String typeText,
-      required final bool isVisible}) = _$_PositionEntity;
+      required final bool isVisible,
+      required final String sender}) = _$_PositionEntity;
   const _PositionEntity._() : super._();
 
   factory _PositionEntity.fromJson(Map<String, dynamic> json) =
@@ -253,6 +271,8 @@ abstract class _PositionEntity extends PositionEntity {
   String get typeText;
   @override
   bool get isVisible;
+  @override
+  String get sender;
   @override
   @JsonKey(ignore: true)
   _$$_PositionEntityCopyWith<_$_PositionEntity> get copyWith =>

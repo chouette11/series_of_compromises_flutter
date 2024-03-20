@@ -7,7 +7,7 @@ part of 'presentation_providers.dart';
 // **************************************************************************
 
 String _$objectPositionListHash() =>
-    r'0908222fd3f91630847b52d5e5190044bebe5462';
+    r'593c55ceda0bf9f69571d81fd3815e6413ab0955';
 
 /// See also [ObjectPositionList].
 @ProviderFor(ObjectPositionList)
