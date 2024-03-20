@@ -121,8 +121,8 @@ class _WebSocketPageState extends ConsumerState<WebSocketPage> {
                           width: 30,
                           height: 30,
                           child: e.uid == uid
-                              ? Image.asset('assets/images/obake.png')
-                              : Image.asset('assets/images/honoo.png')),
+                              ? Image.asset('assets/images/black_obake.png')
+                              : Image.asset('assets/images/obake.png')),
                     ),
                   ),
                 )
